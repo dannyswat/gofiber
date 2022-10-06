@@ -23,7 +23,10 @@ func main() {
 	app.Get("/*", func(c *fiber.Ctx) error {
 		name := c.Params("*")
 		lastDot := strings.LastIndex(name, ".")
-		fileExt := strings.ToLower(name[lastDot:])
+		fileExt := ""
+		if lastDot >= 0 {
+			fileExt = strings.ToLower(name[lastDot:])
+		}
 
 		if name == "" {
 			name = "test.html"
